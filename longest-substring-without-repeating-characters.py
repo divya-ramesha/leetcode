@@ -38,3 +38,22 @@ class Solution(object):
         if len(current_substring) > len(longest_substring):
             longest_substring = current_substring
         return len(longest_substring)
+      
+      
+##################################  OR  ##########################################
+
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        longest_substring = start = 0
+        charMap = {}
+        for index, c in enumerate(s):
+            if c in charMap and charMap[c] >= start:
+                longest_substring = max(longest_substring, index - start)
+                start = charMap[c] + 1
+            charMap[c] = index
+        longest_substring = max(longest_substring, len(s) - start)
+        return longest_substring
